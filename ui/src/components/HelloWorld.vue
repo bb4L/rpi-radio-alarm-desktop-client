@@ -100,7 +100,7 @@ export default
 </script>
 
 <style>
-h3 {
+/* h3 {
 	margin: 40px 0 0;
 }
 
@@ -130,5 +130,5 @@ a {
 	font-weight: 500;
 	color: #FFF;
 	box-shadow: 0pt 1px 4px 1px rgba(85, 86, 228,0.5);
-}
+} */
 </style>

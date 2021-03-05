@@ -6,6 +6,10 @@ import VueRouter from 'vue-router'
 
 import Alarms from './components/alarm/Alarms.vue'
 import AlarmDetail from './components/alarm/AlarmDetail.vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import './app.scss'
 
 // TODO: add home view
 // TODO: add radio view
@@ -29,6 +33,10 @@ const router = new VueRouter({
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(BootstrapVue)
+// this is optional
+// Vue.use(IconsPlugin)
+
 new Vue({
 	store,
 	router,
