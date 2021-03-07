@@ -3,17 +3,14 @@
     <div>
         <p class="mt-5 text-secondary">Alarms</p>
         <div class="mt-2">
-            <div v-for="alarm in alarms">
+            <div v-for="(alarm, idx) in alarms">
                 {{alarm.name}}
                 {{alarm.hour}}
                 {{alarm.min}}
                 {{alarm.days}}
                 {{alarm.on}}
-                <!-- <a href="#"> -->
-                    <!-- <p v-bind:src="alarm" style="width: 150px;" class="d-block mb-3">
-                        {{alarm.name}}
-                    </p> -->
-                <!-- </a> -->
+                {{idx}}
+                <router-link class="btn btn-primary p-5" v-bind:to="'alarm/'+idx">alarm detail</router-link>
             </div>
         </div>
     </div>
@@ -43,7 +40,7 @@ export default {
                 console.log(value)
             }
         )
-        g.call("get_alarms",{}).then(
+        g.call("get_alarms").then(
             function(alarms){
                 console.log("INSIDE THEN")
                 console.log(alarms)

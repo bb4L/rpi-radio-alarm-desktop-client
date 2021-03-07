@@ -1,20 +1,13 @@
 
 <template>
     <div>
-        <p class="mt-5 text-secondary">Alarms</p>
-        <div class="mt-2">
-            <div v-for="alarm in alarms" :key="alarm.name">
+        <p class="mt-5 text-secondary">AlarmDetail</p>
+        <div v-if="alarm" class="mt-2">
                 {{alarm.name}}
                 {{alarm.hour}}
                 {{alarm.min}}
                 {{alarm.days}}
                 {{alarm.on}}
-                <!-- <a href="#"> -->
-                    <!-- <p v-bind:src="alarm" style="width: 150px;" class="d-block mb-3">
-                        {{alarm.name}}
-                    </p> -->
-                <!-- </a> -->
-            </div>
         </div>
     </div>
 </template>
@@ -27,7 +20,7 @@ export default {
     data(){
         // alarmsList = g.call("get_alarms",{})
         return {
-            alarms : []
+            alarm : {}
             // alarms : alarmsList ,
             // adds : ['https://www.braveterry.com/wp-content/uploads/2015/12/vue.js.png', 'https://cdn-images-1.medium.com/max/1200/0*iBvb3FQRnC4Xdyv4.jpg', 'https://www.braveterry.com/wp-content/uploads/2015/12/vue.js.png']
         }
@@ -35,14 +28,15 @@ export default {
 
     created()
 	{
-        console.log('entered')
+        console.log('entered alarm detail')
+        console.log(this.$route.params)
 		g.env().then(env => this.env = env)
-        g.call("get_alarms",{}).then(
-            function(alarms){
-                console.log("INSIDE THEN")
-                console.log(alarms)
-               return alarms
-            } ).then(alarms => this.alarms = alarms)
+        g.call("get_alarm",this.$route.params).then(
+            function(alarm){
+                console.log("INSIDE THEN ALARM")
+                console.log(alarm)
+               return alarm
+            } ).then(alarm => this.alarm = alarm)
 	},
 }
 </script>

@@ -14,6 +14,7 @@ import (
 var Funcs = app.Funcs{
 	"hello_world": funcs.HelloWorld,
 	"get_alarms":  funcs.GetAlarms,
+	"get_alarm":   funcs.GetAlarm,
 	"get_vals":    funcs.GetVals,
 }
 
