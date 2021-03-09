@@ -11,22 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './app.scss'
 
-// TODO: add home view
-// TODO: add radio view
-
-
-// const AlarmDetail = {
-// 	template: `<div>
-// 	  {{$route.params.alarmidx}} 
-// 	</div>`
-// };
-
-// const Alarms = {
-// 	template: `<alarms> </alarms>`
-// }
-
-
-const routes = [{ path: "/alarms", component: Alarms }, {path: "/alarm/:idx", component: AlarmDetail}];
+const routes = [{ path: "/alarms", component: Alarms }, { path: "/alarm/:idx", component: AlarmDetail }];
 const router = new VueRouter({
 	routes
 });

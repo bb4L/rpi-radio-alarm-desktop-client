@@ -2,21 +2,33 @@
 
 <template>
   <div id="app">
+    <nav class="navbar navbar-dark">
+      <router-link class="nav-brand text-primary" to="/">Rpi Radio Alarm</router-link>
 
-    <nav class="navbar navbar-dark bg-dark">
-      <router-link class="btn btn-primary p-5" to="/">Home</router-link>
-      <router-link class="btn btn-primary p-5" to="/alarms">Alarms</router-link>
-      <router-link class="btn btn-primary p-5" to="/radio">Radio</router-link>
+      <!-- <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
+            <!-- <a class="nav-link text-primary" aria-current="page" href="#">Home</a> -->
+            <router-link class="nav-item text-primary" to="/alarms">Alarms</router-link>
+            <router-link class="nav-item text-primary" to="/radio">Radio</router-link>
+      <!-- </div> -->
     </nav>
     <div class="container bg-dark">
-    <div class="row">
-     
-    </div>
-	  <div class="row"> 
-    <div><h2>Router view</h2> </div>
-      <router-view></router-view>
-	  <div> <h2>End Router view</h2> </div>
-    </div>
+      <div class="row"></div>
+      <div class="row">
+      <div class="card col">
+        <router-view></router-view>
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -116,7 +128,6 @@
 // 	color: #FFF;
 // 	box-shadow: 0pt 1px 4px 1px rgba(85, 86, 228,0.5);
 // }
-
 </style>
 
 <script>
@@ -125,9 +136,9 @@ import g from "guark";
 export default {
   name: "App",
 
-//   components: {
-//     HelloWorld,
-//   },
+  //   components: {
+  //     HelloWorld,
+  //   },
 
   created() {
     g.env().then((env) => {
