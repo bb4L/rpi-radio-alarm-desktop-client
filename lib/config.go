@@ -12,10 +12,14 @@ import (
 
 // Funcs Exposed functions to guark Javascript api.
 var Funcs = app.Funcs{
-	"hello_world": funcs.HelloWorld,
-	"get_alarms":  funcs.GetAlarms,
-	"get_alarm":   funcs.GetAlarm,
-	"get_vals":    funcs.GetVals,
+	"hello_world":  funcs.HelloWorld,
+	"get_alarms":   funcs.GetAlarms,
+	"get_alarm":    funcs.GetAlarm,
+	"change_alarm": funcs.ChangeAlarm,
+	"get_radio":    funcs.GetRadio,
+	"start_radio":  funcs.StartRadio,
+	"stop_radio":   funcs.StopRadio,
+	"get_vals":     funcs.GetVals,
 }
 
 // Hooks App hooks.

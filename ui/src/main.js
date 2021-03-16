@@ -3,24 +3,54 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import VueRouter from 'vue-router'
+import { ToastPlugin } from 'bootstrap-vue'
 
 import Alarms from './components/alarm/Alarms.vue'
 import AlarmDetail from './components/alarm/AlarmDetail.vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import Radio from './components/radio/Radio.vue'
+import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './app.scss'
+import helpers from '@/helper/helper'
 
-const routes = [{ path: "/alarms", component: Alarms }, { path: "/alarm/:idx", component: AlarmDetail }];
+const routes = [{ path: "/alarms", component: Alarms }, { path: "/alarm/:idx", component: AlarmDetail }, { path: "/radio", component: Radio }];
 const router = new VueRouter({
 	routes
 });
 
 Vue.config.productionTip = false
+Vue.prototype.helpers = helpers
+Vue.helpers = helpers
+
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
+Vue.use(ToastPlugin)
+Vue.use(helpers)
+
+
 // this is optional
 // Vue.use(IconsPlugin)
+
+Vue.component('shared-component', {
+	// data() {
+	// 	return {
+	// 	}
+	// },
+	// template: ``,
+	methods: {
+		toast(title, content, toaster, append = false) {
+			this.$bvToast.toast(content, {
+				title: title,
+				toaster: toaster,
+				solid: true,
+				appendToast: append,
+				noAutoHide: true
+			});
+		},
+	}
+})
+
 
 new Vue({
 	store,

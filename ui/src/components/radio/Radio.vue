@@ -1,29 +1,92 @@
 
 <template>
-    <div>
-        <p class="mt-5 text-secondary">Radio</p>
-        <div class="mt-2">
-            <!-- TODO: impelement view -->
+  <div>
+    <div class="card-body">
+      <p class="card-title text-primary">Radio</p>
+      <div class="mt-2">
+        <div v-if="radio" class="container">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="radioRunning"
+              v-on:change="switchRadio"
+              :disabled="disabled"
+            />
+            <label class="custom-control-label" for="radioRunning"
+              >is playing
+            </label>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import g from 'guark'
+import g from "guark";
 
 export default {
-    name: "Radio",
-    data(){
-        return {
-            radio : {}
-        }
+  name: "Radio",
+  data() {
+    return {
+      radio: {},
+      disabled: true,
+    };
+  },
+
+  created() {
+    g.call("get_radio")
+      .then((radio) => {
+        this.radio = radio;
+        this.successToast();
+      })
+      .catch(() => {
+        this.errorToast();
+      });
+  },
+  methods: {
+    switchRadio: function (event) {
+      console.log("CHANGED");
+      this.disabled = true;
+      console.log(event);
+
+      if (event.srcElement.checked) {
+        g.call("start_radio")
+          .then((radio) => {
+            this.radio = radio;
+            this.successToast();
+          })
+          .catch(() => {
+            this.errorToast();
+          });
+      } else {
+        g.call("stop_radio")
+          .then((radio) => {
+            this.radio = radio;
+            this.successToast();
+          })
+          .catch(() => {
+            this.errorToast();
+          });
+      }
+      this.$emit("change", event.target.checked);
     },
 
-    created()
-	{
-        console.log('entered')
-        // TODO: add handler functions!!
+    errorToast() {
+      this.helper.errorToast(
+        this,
+        "Radio",
+        `Could not update radio information`
+      );
+    },
 
-	},
-}
+    successToast() {
+      this.helpers.successToast(this, "Radio", `Updated radio information`);
+      this.helper.delay(2000).then(() => {
+        this.disabled = false;
+      });
+    },
+  },
+};
 </script>

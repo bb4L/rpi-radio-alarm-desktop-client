@@ -8,10 +8,11 @@ setup:
   - cmd: go mod verify
 
 linux:
-  ldflags: ""
+  ldflags: "-X 'rpi-radio-alarm-desktop-client/lib/funcs.Alarmurl=ALARMURL' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheader=EXTRAHEADER' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheadervalue=EXTRAHEADERVALUE'"
+
 
 darwin:
-  ldflags: ""
+  ldflags: "-X 'rpi-radio-alarm-desktop-client/lib/funcs.Alarmurl=ALARMURL' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheader=EXTRAHEADER' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheadervalue=EXTRAHEADERVALUE'"
 
 windows:
   cc: /usr/bin/x86_64-w64-mingw32-gcc

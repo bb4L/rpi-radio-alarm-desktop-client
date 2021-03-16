@@ -6,8 +6,8 @@
 
 
 
-// @import 'node_modules/bootstrap/scss/bootstrap.scss';
-// @import 'node_modules/bootstrap-vue/src/index.scss';
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';
 
 /*! Themestr.app `Darkster` Bootstrap 4.3.1 theme */
 @import url(https://fonts.googleapis.com/css?family=Comfortaa:200,300,400,700);
@@ -5753,6 +5753,30 @@ a.text-dark:hover, a.text-dark:focus {
     color: goldenrod!important;
 }
 
+.toast .toast-header{
+  background-color: rgb(144, 144, 144);
+}
+
+.b-toast-info .toast .toast-header{
+  color: #0056d7;
+  // background-color: #ccc;
+}
+
+
+.b-toast-success .toast .toast-header{
+  color: #00d70b;
+  // background-color: rgb(144, 144, 144);
+}
+
+.b-toast-danger .toast .toast-header{
+  color: #d76100;
+  // background-color: #ccc;
+}
+
+.toast-body {
+  background-color: #0d0d0d;
+  color: #ccc;
+}
 
 // Then import Bootstrap an BootstrapVue SCSS files (order is important)
 // @import 'node_modules/bootstrap/scss/bootstrap.scss';

@@ -16,6 +16,8 @@ github.com/bb4L/rpi-radio-alarm-go-library v0.0.0-20210212200545-f0c1ad2174d3 h1
 github.com/bb4L/rpi-radio-alarm-go-library v0.0.0-20210212200545-f0c1ad2174d3/go.mod h1:LYYEuXPpwLJqV2P8xDqCFC7+4/oY0sHZQco9PJhYueM=
 github.com/bb4L/rpi-radio-alarm-go-library v1.0.0 h1:WghCjfIEexijgFTbI1c2bZPsOadgLvit6PDwCua/LPg=
 github.com/bb4L/rpi-radio-alarm-go-library v1.0.0/go.mod h1:LYYEuXPpwLJqV2P8xDqCFC7+4/oY0sHZQco9PJhYueM=
+github.com/bb4L/rpi-radio-alarm-go-library v1.0.1 h1:wrzj9F8Gw7zM64s4QH3vyakRGYyTDR3mkjq0PkN2+6Y=
+github.com/bb4L/rpi-radio-alarm-go-library v1.0.1/go.mod h1:LYYEuXPpwLJqV2P8xDqCFC7+4/oY0sHZQco9PJhYueM=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
 github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e/go.mod h1:nSuG5e5PlCu98SY8svDHJxuZscDgtXS6KTTbou5AhLI=
 github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1/go.mod h1:Q3SI9o4m/ZMnBNeIyt5eFwwo7qiLfzFZmjNmxjkiQlU=
