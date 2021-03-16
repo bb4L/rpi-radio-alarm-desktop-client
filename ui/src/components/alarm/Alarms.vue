@@ -75,13 +75,13 @@ export default {
     successToast() {
       this.helpers.successToast(this, "Alarms", `Updated alarms`);
       const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
-      delay(2000).then(() => {
+      delay(1000).then(() => {
         this.disabled = false;
       });
     },
 
     errorToast() {
-      this.helpers.errorToast(this, "Alarms", `Could not update alarms`);
+      this.helpers.errorToast(this, "Alarms", "Could not update alarms");
     },
 
     switchAlarm: function (event) {
@@ -100,7 +100,6 @@ export default {
         alarm: JSON.stringify(alarm),
         idx: event.srcElement.attributes.idx.value,
       }).then((data) => {
-        
         // JSON.parse(atob(alarm))
         console.log("data");
         console.log(data);

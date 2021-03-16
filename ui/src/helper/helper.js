@@ -7,7 +7,7 @@ function toast(ref, title, content, toaster = "b-toaster-bottom-right", variant 
         appendToast: append,
         variant: variant,
         noAutoHide: noAutoHide,
-        autoHideDelay: 2000,
+        autoHideDelay: 1000,
     });
 }
 

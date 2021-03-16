@@ -66,56 +66,77 @@ func GetAlarm(c app.Context) (interface{}, error) {
 
 // ChangeAlarm change the alarm
 func ChangeAlarm(c app.Context) (interface{}, error) {
-	// paramAlarm := c.Params["alarm"].(types.Alarm)
-	// paramAlarm, ok := c.Params["alarm"].(types.Alarm)
-	// if !ok {
-	// 	return "not ok", nil
-	// }
-	// c.App.Log.Debug(paramAlarm)
-	// var alarm types.Alarm
-	// alarmJson := make(types.Alarm)
-
-	// alarm.Name = paramAlarm.Name
-	// alarm.Days = paramAlarm[]
-	// val := c.Params["alarm"]
-	// val := c.Params.GetOr("alarm", types.Alarm{})
-	// val, _ := c.GetOr("alarm", types.Alarm{}).(types.Alarm)
 	val, ok := c.GetOr("alarm", "").(string)
-	// err := json.Unmarshal([]byte(val), &alarm)
 	if !ok {
-		return "u", fmt.Errorf("get or err: " + val)
+		return nil, fmt.Errorf("get or err: " + val)
 	}
 
 	var alarm types.Alarm
-	json.Unmarshal([]byte(val), &alarm)
-
-	if len(val) < 4 {
-		return "a", fmt.Errorf("val <5 : " + val)
+	jsonErr := json.Unmarshal([]byte(val), &alarm)
+	if jsonErr != nil {
+		return nil, jsonErr
 	}
-
-	// bytes := []byte(val)
-
-	// return "val: " + val, nil
-
-	// return alarm, nil
 
 	idx, err := strconv.ParseInt(fmt.Sprintf("%v", (c.Params["idx"])), 10, 32)
 	if err != nil {
-		return "b", err
+		return nil, err
 	}
 
 	helper := getHelper()
 	result_alarm, alarm_err := helper.ChangeAlarm(alarm, int(idx))
 	if alarm_err != nil {
-		return "c", alarm_err
+		return nil, alarm_err
 	}
 
-	// return result_alarm.Name + " idx: " + fmt.Sprint(int(idx)), nil
-
 	data, jsonErr := json.Marshal(result_alarm)
-	// data, jsonErr := json.Marshal(alarm)
 	if jsonErr != nil {
-		return "d", jsonErr
+		return nil, jsonErr
+	}
+	return string(data[:]), nil
+}
+
+// CreateAlarm creates a new alarm
+func CreateAlarm(c app.Context) (interface{}, error) {
+	val, ok := c.GetOr("alarm", "").(string)
+	if !ok {
+		return nil, fmt.Errorf("get or err: " + val)
+	}
+
+	var alarm types.Alarm
+	err := json.Unmarshal([]byte(val), &alarm)
+	if err != nil {
+		return nil, err
+	}
+
+	helper := getHelper()
+	alarms, addErr := helper.AddAlarm(alarm)
+
+	if addErr != nil {
+		return nil, addErr
+	}
+
+	data, jsonErr := json.Marshal(alarms)
+	if jsonErr != nil {
+		return nil, jsonErr
+	}
+	return string(data[:]), nil
+}
+
+// DeleteAlarm deletes the alarm on the passed in index
+func DeleteAlarm(c app.Context) (interface{}, error) {
+	idx, err := strconv.ParseInt(fmt.Sprintf("%v", (c.Params["idx"])), 10, 32)
+	if err != nil {
+		return nil, err
+	}
+	helper := getHelper()
+	alarms, err := helper.DeleteAlarm(int(idx))
+	if err != nil {
+		return nil, err
+	}
+
+	data, jsonErr := json.Marshal(alarms)
+	if jsonErr != nil {
+		return nil, jsonErr
 	}
 	return string(data[:]), nil
 }
