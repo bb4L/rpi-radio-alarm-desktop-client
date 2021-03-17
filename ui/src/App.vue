@@ -15,8 +15,6 @@
       <div class="row">
         <div class="card col">
           <router-view>
-
-            TEST
           </router-view>
         </div>
       </div>

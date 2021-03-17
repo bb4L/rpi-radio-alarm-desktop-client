@@ -46,9 +46,7 @@ export default {
   },
   methods: {
     switchRadio: function (event) {
-      console.log("CHANGED");
       this.disabled = true;
-      console.log(event);
 
       if (event.srcElement.checked) {
         g.call("start_radio")

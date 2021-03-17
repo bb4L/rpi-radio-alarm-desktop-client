@@ -1,4 +1,3 @@
-import g from 'guark'
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
@@ -8,13 +7,14 @@ import { ToastPlugin } from 'bootstrap-vue'
 import Alarms from './components/alarm/Alarms.vue'
 import AlarmDetail from './components/alarm/AlarmDetail.vue'
 import Radio from './components/radio/Radio.vue'
+import Home from './components/home/Home.vue'
 import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './app.scss'
 import helpers from '@/helper/helper'
 
-const routes = [{ path: "/alarms", component: Alarms }, { path: "/alarm/new", component: AlarmDetail }, { path: "/alarm/:idx", component: AlarmDetail }, { path: "/radio", component: Radio }];
+const routes = [{ path: "/", component: Home }, { path: "/alarms", component: Alarms }, { path: "/alarm/new", component: AlarmDetail }, { path: "/alarm/:idx", component: AlarmDetail }, { path: "/radio", component: Radio }];
 const router = new VueRouter({
 	routes
 });
@@ -32,6 +32,4 @@ new Vue({
 	store,
 	router,
 	render: h => h(App),
-	created: () => g.hook("created"),
-	mounted: () => g.hook("mounted"),
 }).$mount('#app')
