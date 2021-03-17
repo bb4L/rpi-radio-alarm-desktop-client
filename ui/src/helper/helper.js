@@ -33,5 +33,5 @@ export default {
     infoToast,
     successToast,
     errorToast,
-    delay
+    delay,
 }

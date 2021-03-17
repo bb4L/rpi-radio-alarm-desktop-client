@@ -14,7 +14,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './app.scss'
 import helpers from '@/helper/helper'
 
-const routes = [{ path: "/alarms", component: Alarms }, { path: "/alarm/:idx", component: AlarmDetail }, { path: "/radio", component: Radio }];
+const routes = [{ path: "/alarms", component: Alarms }, { path: "/alarm/new", component: AlarmDetail }, { path: "/alarm/:idx", component: AlarmDetail }, { path: "/radio", component: Radio }];
 const router = new VueRouter({
 	routes
 });
@@ -27,30 +27,6 @@ Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 Vue.use(ToastPlugin)
 Vue.use(helpers)
-
-
-// this is optional
-// Vue.use(IconsPlugin)
-
-Vue.component('shared-component', {
-	// data() {
-	// 	return {
-	// 	}
-	// },
-	// template: ``,
-	methods: {
-		toast(title, content, toaster, append = false) {
-			this.$bvToast.toast(content, {
-				title: title,
-				toaster: toaster,
-				solid: true,
-				appendToast: append,
-				noAutoHide: true
-			});
-		},
-	}
-})
-
 
 new Vue({
 	store,

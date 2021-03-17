@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <div class="card-body">
@@ -74,7 +73,7 @@ export default {
     },
 
     errorToast() {
-      this.helper.errorToast(
+      this.helpers.errorToast(
         this,
         "Radio",
         `Could not update radio information`
@@ -83,7 +82,7 @@ export default {
 
     successToast() {
       this.helpers.successToast(this, "Radio", `Updated radio information`);
-      this.helper.delay(2000).then(() => {
+      this.helpers.delay(2000).then(() => {
         this.disabled = false;
       });
     },

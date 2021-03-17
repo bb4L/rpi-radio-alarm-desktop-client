@@ -12,7 +12,6 @@ import (
 
 // Funcs Exposed functions to guark Javascript api.
 var Funcs = app.Funcs{
-	"hello_world":  funcs.HelloWorld,
 	"get_alarms":   funcs.GetAlarms,
 	"get_alarm":    funcs.GetAlarm,
 	"change_alarm": funcs.ChangeAlarm,

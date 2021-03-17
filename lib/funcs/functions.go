@@ -1,9 +1,8 @@
 package funcs
 
 import (
-	"fmt"
-	// "reflect"
 	"encoding/json"
+	"fmt"
 	"strconv"
 
 	"github.com/bb4L/rpi-radio-alarm-go-library/api"
@@ -11,13 +10,6 @@ import (
 	"github.com/bb4L/rpi-radio-alarm-go-library/types"
 	"github.com/guark/guark/app"
 )
-
-func HelloWorld(c app.Context) (interface{}, error) {
-
-	c.App.Log.Info("HelloWorld called")
-
-	return nil, nil
-}
 
 var Alarmurl = "TEST_URL"
 var Extraheader = "EXTRAHEADER"

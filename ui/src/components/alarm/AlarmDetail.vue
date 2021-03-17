@@ -1,4 +1,3 @@
-
 <template>
   <div class="card">
     <div class="card-body">
@@ -60,57 +59,54 @@
           <div class="col text-right">
             <div class="custom-control custom-switch">
               <input
+                id="alarmOn"
                 type="checkbox"
                 class="custom-control-input"
                 v-model="alarm.on"
                 :disabled="disabled"
               />
-              <label class="custom-control-label" v-bind:for="'alarmOn' + idx">
+              <label class="custom-control-label" v-bind:for="'alarmOn'">
                 <div v-if="alarm.on">on</div>
                 <div v-if="!alarm.on">off</div>
               </label>
             </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-6"></div>
           <div class="col" v-if="idx == -1">
-            <button class="btn btn-outline-success" @click="createAlarm()">
-              Create Alarm
-            </button>
+            <div class="row">
+              <button class="col btn btn-outline-success mr-2" @click="createAlarm()">
+                Create Alarm
+              </button>
+            </div>
           </div>
 
           <div class="col" v-if="idx != -1">
-            <button class="btn btn-outline-success" @click="saveAlarm()">
-              Save
-            </button>
-          </div>
-
-          <div class="col">
-            <b-button v-b-modal.delete-modal class="btn btn-outline-danger"
-              >Delete</b-button
-            >
-
-            <b-modal
-              id="delete-modal"
-              title="Delete Alarm"
-              hide-header-close="true"
-            >
-            Do you really want to delete the account?
-              <template #modal-footer>
-                <b-button
-                  class="btn btn-outline-success"
-                  block
-                  @click="$bvModal.hide('delete-modal')"
-                >
-                  Cancel
-                </b-button>
-                <b-button class="btn btn-danger" block @click="deleteAlarm()">
-                  Delete
-                </b-button>
-              </template>
-            </b-modal>
+            <div class="row">
+              <button class="col btn btn-outline-success mr-2" @click="saveAlarm()">
+                Save
+              </button>
+              <b-button v-b-modal.delete-modal class="col btn btn-outline-danger">Delete</b-button>
+              <b-modal
+                id="delete-modal"
+                title="Delete Alarm"
+                hide-header-close="true"
+              >
+                Do you really want to delete the account?
+                <template #modal-footer>
+                  <b-button
+                    class="btn btn-outline-success"
+                    block
+                    @click="$bvModal.hide('delete-modal')"
+                  >
+                    Cancel
+                  </b-button>
+                  <b-button class="btn btn-danger" block @click="deleteAlarm()">
+                    Delete
+                  </b-button>
+                </template>
+              </b-modal>
           </div>
         </div>
       </div>
@@ -131,46 +127,89 @@ export default {
   },
 
   created() {
-    this.idx = this.$route.params["idx"];
-    // TODO: handle if "new" alarm
+    let idx = this.$route.params["idx"];
+
+    if (idx === parseInt(idx, 10).toString()) {
+      this.idx = parseInt(idx, 10);
+    }
+
     if (this.idx >= 0) {
-      g.call("get_alarm", this.$route.params).then((alarm) => {
-        this.alarm = JSON.parse(alarm);
-        this.helpers.successToast(this, "Alarm", "retrieved alarm");
-      });
+      g.call("get_alarm", { idx: this.idx.toString() })
+        .then((alarm) => {
+          this.handleAlarm(alarm, "Alarm retrieved");
+        })
+        .catch(() => {
+          this.helpers.errorToast(this, "Alarm", "could not get alarm");
+        });
+    } else {
+      this.idx = -1;
+      this.disabled = false;
     }
   },
 
   methods: {
     createAlarm() {
-      g.call("create_alarm", { alarm: JSON.stringify(this.alarm) }).then(() => {
-        this.$router.push("/alarms");
-        this.helpers.successToast(this, "Alarm", "Alarm created");
-      });
+      this.disabled = true;
+      this.handleAlarm();
+
+      g.call("create_alarm", { alarm: JSON.stringify(this.alarm) })
+        .then(() => {
+          this.$router.push("/alarms");
+          this.helpers.successToast(this, "Alarm", "Alarm created");
+        })
+        .catch(() => {
+          this.disabled = false;
+          this.helpers.errorToast(this, "Alarm", "Alarm could not be created");
+        });
     },
 
     saveAlarm() {
+      this.prepareAlarm();
+
       g.call("change_alarm", {
         alarm: JSON.stringify(this.alarm),
-        idx: this.idx,
-      }).then((alarm) => {
-        this.alarm = alarm;
-        this.helper.successToast(this, "Alarm", "Alarm saved");
-        this.helper.delay(1000).then(() => (this.disabled = false));
-      });
+        idx: this.idx.toString(),
+      })
+        .then((alarm) => {
+          this.handleAlarm(alarm, "Alarm saved");
+        })
+        .catch(() => {
+          this.helpers.errorToast(this, "Alarm", "could not save alarm");
+        });
     },
 
     deleteAlarm() {
-      console.log("delete alarm");
-      // g.call("delete_alarm", { idx: this.idx })
-      //   .then(() => {
-      //     this.$router.push("/alarms");
-      //     this.helpers.successToast(this, "Alarm", "Alarm deleted");
-      //   })
-      //   .catch(() => {
-      //     this.$router.push("/alarms");
-      //     this.helpers.errorToast(this, "Alarm", "Alarm could not be deleted");
-      //   });
+      this.disabled = true;
+
+      g.call("delete_alarm", { idx: this.idx })
+        .then(() => {
+          this.$router.push("/alarms");
+          this.helpers.successToast(this, "Alarm", "Alarm deleted");
+        })
+        .catch(() => {
+          this.$router.push("/alarms");
+          this.helpers.errorToast(this, "Alarm", "Alarm could not be deleted");
+          this.disabled = false;
+        });
+    },
+
+    handleAlarm(alarm, msg) {
+      this.alarm = JSON.parse(alarm);
+      this.helpers.successToast(this, "Alarm", msg);
+      this.helpers.delay(1000).then(() => (this.disabled = false));
+    },
+
+    prepareAlarm() {
+      this.alarm.hour = parseInt(this.alarm.hour, 10);
+      this.alarm.min = parseInt(this.alarm.min, 10);
+      if (
+        typeof this.alarm.days === "string" ||
+        this.alarm.days instanceof String
+      ) {
+        this.alarm.days = this.alarm.days.split(",").map((n) => {
+          return parseInt(n, 10);
+        });
+      }
     },
   },
 };

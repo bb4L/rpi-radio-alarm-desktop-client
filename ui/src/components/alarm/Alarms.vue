@@ -1,4 +1,3 @@
-
 <template>
     <div class="card-body">
     <p class="card-title text-primary">Alarms</p>
@@ -10,10 +9,15 @@
             <div class="row align-items-center m-2">
                 <div class="col-6 p-2">
                   <router-link  v-bind:to="'alarm/' + idx" class="list-group-item list-group-item-action" :is="disabled ? 'span' : 'router-link'">
-                    {{ alarm.name }}
-                    Time: {{ alarm.hour }}:{{ alarm.min }}
-
-                    Days:{{ alarm.days }}
+                    <div class="row">
+                      {{ alarm.name }}
+                    </div>
+                    <div class="row">
+                      Time: {{ alarm.hour }}:{{ alarm.min }}
+                    </div>
+                    <div class="row">
+                      Days:{{ alarm.days }}
+                    </div>
                   </router-link>
                 </div>
 
@@ -43,8 +47,13 @@
                 </div>
             </div>
           </div>
-    
         </div>
+      </div>
+
+      <div class="row m-2 justify-content-end">
+        <router-link  v-bind:to="'alarm/new'" class="btn btn-primary" :is="disabled ? 'span' : 'router-link'">
+          Create new Alarm
+        </router-link>
       </div>
     </div>
 </template>
@@ -85,25 +94,17 @@ export default {
     },
 
     switchAlarm: function (event) {
-      console.log("switch alarm");
-      // console.log(event);
-      // console.log(event.srcElement.attributes);
-      // console.log(event.srcElement.attributes.idx);
-      // console.log(Number(event.srcElement.attributes.idx.value));
-      // console.log(this.alarms[Number(event.srcElement.attributes.idx.value)]);
       let alarm = this.alarms[Number(event.srcElement.attributes.idx.value)];
-      // console.log("alarm");
-      console.log(alarm);
-      // console.log(alarm.on);
-      // this.alarms[Number(event.srcElement.attributes.idx.value)] = alarm;
       g.call("change_alarm", {
         alarm: JSON.stringify(alarm),
         idx: event.srcElement.attributes.idx.value,
-      }).then((data) => {
-        // JSON.parse(atob(alarm))
-        console.log("data");
-        console.log(data);
-      });
+      })
+        .then(() => {
+          this.helpers.successToast(this, "Alarm", "Alarm was changed");
+        })
+        .catch(() => {
+          this.helpers.errorToast(this, "Alarm", "Could not change alarm");
+        });
 
       this.$emit("change", event.target.checked);
     },
