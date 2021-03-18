@@ -10,7 +10,7 @@ name: Rpi Radio Alarm Client
 version: v1.0.0
 
 # App license slug name.
-license: MIT
+license: GPLv3
 
 # App log level. Values: debug, info, warn, error, fatal, panic
 logLevel: debug
