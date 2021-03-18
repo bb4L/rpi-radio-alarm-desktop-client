@@ -1,0 +1,21 @@
+# Guark build config file.
+
+setup:
+  - cmd: yarn install
+    dir: ui
+  - cmd: go mod download
+  - cmd: go mod tidy
+  - cmd: go mod verify
+
+linux:
+  ldflags: "-X 'rpi-radio-alarm-desktop-client/lib/funcs.Alarmurl=ALARMURL' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheader=EXTRAHEADER' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheadervalue=EXTRAHEADERVALUE'"
+
+
+darwin:
+  ldflags: "-X 'rpi-radio-alarm-desktop-client/lib/funcs.Alarmurl=ALARMURL' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheader=EXTRAHEADER' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheadervalue=EXTRAHEADERVALUE'"
+
+windows:
+  cc: /usr/bin/x86_64-w64-mingw32-gcc
+  cxx: /usr/bin/x86_64-w64-mingw32-g++
+  ldflags: "-H windowsgui -X 'rpi-radio-alarm-desktop-client/lib/funcs.Alarmurl=ALARMURL' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheader=EXTRAHEADER' -X 'rpi-radio-alarm-desktop-client/lib/funcs.Extraheadervalue=EXTRAHEADERVALUE'"
+  windres: /usr/bin/x86_64-w64-mingw32-windres
