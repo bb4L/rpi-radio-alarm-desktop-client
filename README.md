@@ -4,6 +4,7 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/bb4L/rpi-radio-alarm-desktop-client)
 ![GitHub last commit](https://img.shields.io/github/last-commit/bb4L/rpi-radio-alarm-desktop-client)
 ![GitHub](https://img.shields.io/github/license/bb4L/rpi-radio-alarm-desktop-client)
+[![Go Report Card](https://goreportcard.com/badge/github.com/bb4L/rpi-radio-alarm-desktop-client)](https://goreportcard.com/report/github.com/bb4L/rpi-radio-alarm-desktop-client)
 
 A desktop client for the [rpi-radio-alarm-go](https://github.com/bb4L/rpi-radio-alarm-go).
 

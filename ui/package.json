@@ -10,9 +10,13 @@
 		"bootstrap": "^4.6.0",
 		"bootstrap-vue": "^2.21.2",
 		"core-js": "^3.6.5",
+		"elliptic": "^6.5.4",
 		"guark": "^0.1.0",
+		"highlight.js": "^10.7.2",
+		"is-svg": "^4.3.1",
 		"vue": "^2.6.12",
-		"vuex": "^3.4.0"
+		"vuex": "^3.4.0",
+		"y18n": "^5.0.8"
 	},
 	"devDependencies": {
 		"@vue/cli-plugin-babel": "~4.4.0",
