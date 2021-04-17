@@ -11,8 +11,13 @@ import (
 	"github.com/guark/guark/app"
 )
 
+// Alarmurl url of the rpi-radio-alarm
 var Alarmurl = "TEST_URL"
+
+// Extraheader header for the requests
 var Extraheader = "EXTRAHEADER"
+
+// Extraheadervalue value for the extra header
 var Extraheadervalue = "EXTRAHEADERVALUE"
 
 func getHelper() api.Helper {
@@ -75,12 +80,12 @@ func ChangeAlarm(c app.Context) (interface{}, error) {
 	}
 
 	helper := getHelper()
-	result_alarm, alarm_err := helper.ChangeAlarm(alarm, int(idx))
-	if alarm_err != nil {
-		return nil, alarm_err
+	resultAlarm, alarmErr := helper.ChangeAlarm(alarm, int(idx))
+	if alarmErr != nil {
+		return nil, alarmErr
 	}
 
-	data, jsonErr := json.Marshal(result_alarm)
+	data, jsonErr := json.Marshal(resultAlarm)
 	if jsonErr != nil {
 		return nil, jsonErr
 	}
